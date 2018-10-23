@@ -1,6 +1,7 @@
 import React from 'react'
-import { Form, Input, Select, Button, Radio, message, Alert } from 'antd'
+import { Form, Input, Select, Button, Radio, Alert } from 'antd'
 import axios from 'axios'
+import styled from 'styled-components'
 import settings from '../../settings'
 
 const FormItem = Form.Item
@@ -11,7 +12,24 @@ const RadioButton = Radio.Button
 class FormInfo extends React.Component {
   state = {
     loading: false,
+    users: [],
     name: ''
+  }
+
+  componentDidMount() {
+    axios
+      .get(`${settings.url}/users`)
+      .then(res => {
+        if (res.data && res.data.success) {
+          console.log('users...', res.data.users)
+          this.setState({ users: res.data.users })
+        }
+      })
+      .catch(err => {
+        if (err.response) {
+          console.log(error.response.data.errorMsg)
+        }
+      })
   }
 
   handleSubmit = e => {
@@ -23,9 +41,12 @@ class FormInfo extends React.Component {
           .post(`${settings.url}/users`, values)
           .then(res => {
             if (res.data && res.data.success) {
-              message.info('系统已经保存了您提交的信息!')
               this.props.form.resetFields()
-              this.setState({ loading: false, name: res.data.name })
+              this.setState({
+                loading: false,
+                name: res.data.user.name,
+                users: [res.data.user, ...this.state.users]
+              })
             }
           })
           .catch(err => {
@@ -39,23 +60,36 @@ class FormInfo extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { name, loading } = this.state
+    const { name, loading, users } = this.state
+    const len = users.length
+    let userList
+    if (len) {
+      userList = users.map((user, index) => {
+        return (
+          <Item key={user._id}>
+            <Num>{len - index}</Num>
+            <Name>{user.name}</Name>
+          </Item>
+        )
+      })
+    }
+
     return (
       <div>
         <Alert
-          message="小提示，请您先把表单中的每项信息都填写完成后，再点击提交信息按钮"
+          message="小提示，收集信息的目的是为了帮助大家去领参赛物品，提交成功后您的名字会出现在最下方的列表中，如有问题请联系王广忠"
           type="warning"
-          style={{ fontSize: 14, marginBottom: 32 }}
+          style={{ lineHeight: 2, marginBottom: 32 }}
         />
         <div
           style={{
-            fontSize: 18,
+            fontSize: 20,
             textAlign: 'center',
             marginBottom: 32,
-            color: 'rgba(0, 0, 0, 0.85)'
+            color: '#212121'
           }}
         >
-          马拉松参赛选手信息登记表
+          阿那亚信息登记表
         </div>
         <Form onSubmit={this.handleSubmit} layout="vertical">
           <FormItem label="姓名">
@@ -115,6 +149,8 @@ class FormInfo extends React.Component {
               ]
             })(
               <RadioGroup>
+                <RadioButton value="s">s</RadioButton>
+                <RadioButton value="m">m</RadioButton>
                 <RadioButton value="l">L</RadioButton>
                 <RadioButton value="xl">XL</RadioButton>
                 <RadioButton value="xxl">XXL</RadioButton>
@@ -142,18 +178,48 @@ class FormInfo extends React.Component {
         </Form>
         {name ? (
           <Alert
-            message={`${name}，太棒了，您提交的信息已经保存了`}
+            message={`${name}，太棒了，您的信息已经提交成功了！`}
             type="success"
-            style={{ fontSize: 14, marginTop: 24 }}
+            style={{ marginTop: 24 }}
           />
         ) : (
           ''
         )}
+        <div style={{ marginTop: 32 }}>
+          <Title>提交成功名单</Title>
+          {len ? userList : <div>尚且没有人提交信息</div>}
+        </div>
       </div>
     )
   }
 }
 
 const RegistrationForm = Form.create()(FormInfo)
+
+const Title = styled.div`
+  text-align: center;
+  font-size: 20px;
+  color: #212121;
+  margin-bottom: 32px;
+`
+
+const Item = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+`
+const Num = styled.div`
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 24px;
+`
+const Name = styled.div`
+  font-size: 18px;
+`
 
 export default RegistrationForm
