@@ -77,7 +77,7 @@ class FormInfo extends React.Component {
     return (
       <div>
         <Alert
-          message="小提示，收集信息的目的是为了帮助大家去领参赛物品，提交成功后您的名字会出现在最下方的列表中，没有收到参赛号的朋友，请联系臧秀玉女士。"
+          message="小提示，收集信息的目的是为了帮助大家去领参赛物品，提交成功后您的名字会出现在最下方的列表中，没有收到参赛号的朋友，请联系臧秀玉女士。如果不小心提交错误，再提交一次即可，我们以最新提交的信息为准。"
           type="warning"
           style={{ lineHeight: 2, marginBottom: 32 }}
         />
