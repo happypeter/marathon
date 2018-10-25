@@ -3,6 +3,7 @@ import { Form, Input, Select, Button, Radio, Alert } from 'antd'
 import axios from 'axios'
 import styled from 'styled-components'
 import settings from '../../settings'
+import CheckInfo from './CheckInfo'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -174,18 +175,17 @@ class FormInfo extends React.Component {
             <Button type="primary" htmlType="submit" loading={loading}>
               {loading ? '正在提交...' : '提交信息'}
             </Button>
+            <CheckInfo />
           </FormItem>
         </Form>
         {name ? (
           <Alert
             message={`${name}，太棒了，您的信息已经提交成功了！`}
             type="success"
-            style={{ marginTop: 24 }}
+            style={{ marginTop: 48 }}
           />
-        ) : (
-          ''
-        )}
-        <div style={{ marginTop: 32 }}>
+        ) : null}
+        <div style={{ marginTop: 48 }}>
           <Title>提交成功名单</Title>
           {len ? userList : <div>尚且没有人提交信息</div>}
         </div>

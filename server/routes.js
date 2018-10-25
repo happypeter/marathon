@@ -23,4 +23,18 @@ router.get('/users', async (req, res) => {
   }
 })
 
+router.post('/check', async (req, res) => {
+  const { identity } = req.body
+  try {
+    const user = await User.findOne({ identity })
+    if (!user) {
+      res.json({ success: false })
+    } else {
+      res.json({ success: true, user })
+    }
+  } catch (err) {
+    console.log('check user info err...', err)
+  }
+})
+
 module.exports = router
