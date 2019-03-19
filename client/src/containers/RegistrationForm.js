@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Select, Button, Radio, Alert } from 'antd'
+import { Form, Input, Select, Button, Radio, Alert, DatePicker } from 'antd'
 import axios from 'axios'
 import styled from 'styled-components'
 import settings from '../../settings'
@@ -77,11 +77,6 @@ class FormInfo extends React.Component {
 
     return (
       <div>
-        <Alert
-          message="小提示，收集信息的目的是为了帮助大家去领参赛物品，提交成功后您的名字会出现在最下方的列表中，没有收到参赛号的朋友，请联系臧秀玉女士。如果不小心提交错误，再提交一次即可，我们以最新提交的信息为准。"
-          type="warning"
-          style={{ lineHeight: 2, marginBottom: 32 }}
-        />
         <div
           style={{
             fontSize: 20,
@@ -132,20 +127,68 @@ class FormInfo extends React.Component {
                 {
                   required: true,
                   message: '请输入身份证号'
-                },
-                {
-                  validator: this.validateToNextPassword
                 }
               ]
             })(<Input />)}
           </FormItem>
 
-          <FormItem label="参赛衣服">
+          <FormItem label="紧急联系人">
+            {getFieldDecorator('contact', {
+              rules: [
+                {
+                  required: true,
+                  message: '请输入紧急联系人'
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
+
+          <FormItem label="紧急联系人电话">
+            {getFieldDecorator('contactPhone', {
+              rules: [
+                {
+                  required: true,
+                  message: '请输入紧急联系人电话'
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
+
+          <FormItem label="出生日期">
+            {getFieldDecorator('birthday', {
+              rules: [
+                {
+                  required: true,
+                  message: '请选择出生日期'
+                }
+              ]
+            })(<Input placeholder="例如：1990年7月10号" />)}
+          </FormItem>
+
+          <FormItem label="血型">
+            {getFieldDecorator('bloodType', {
+              rules: [
+                {
+                  required: true,
+                  message: '请输入紧急联系人电话'
+                }
+              ]
+            })(
+              <RadioGroup>
+                <Radio value="A">A</Radio>
+                <Radio value="B">B</Radio>
+                <Radio value="O">O</Radio>
+                <Radio value="AB">AB</Radio>
+              </RadioGroup>
+            )}
+          </FormItem>
+
+          <FormItem label="T恤尺寸">
             {getFieldDecorator('size', {
               rules: [
                 {
                   required: true,
-                  message: '请选择衣服大小'
+                  message: '请选择T恤尺寸'
                 }
               ]
             })(
@@ -158,17 +201,6 @@ class FormInfo extends React.Component {
                 <RadioButton value="xxxl">XXXL</RadioButton>
               </RadioGroup>
             )}
-          </FormItem>
-
-          <FormItem label="参赛号码">
-            {getFieldDecorator('number', {
-              rules: [
-                {
-                  required: true,
-                  message: '请输入参赛号码'
-                }
-              ]
-            })(<Input />)}
           </FormItem>
 
           <FormItem>

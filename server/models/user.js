@@ -4,10 +4,13 @@ const Schema = mongoose.Schema
 const UserSchema = new Schema(
   {
     name: String,
-    phone: String,
     gender: String,
+    phone: String,
     identity: String,
-    number: String,
+    contact: String,
+    contactPhone: String,
+    birthday: String,
+    bloodType: String,
     size: String
   },
   { timestamps: true }
