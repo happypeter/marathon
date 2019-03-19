@@ -88,12 +88,24 @@ class CheckInfo extends Component {
                 {user.identity}
               </div>
               <div>
-                <label>参赛衣服：</label>
-                {user.size}
+                <label>紧急联系人：</label>
+                {user.contact}
               </div>
               <div>
-                <label>参赛号码：</label>
-                {user.number}
+                <label>紧急联系人电话：</label>
+                {user.contactPhone}
+              </div>
+              <div>
+                <label>出生日期：</label>
+                {user.birthday}
+              </div>
+              <div>
+                <label>血型：</label>
+                {user.bloodType}
+              </div>
+              <div>
+                <label>T恤尺寸：</label>
+                {user.size}
               </div>
             </List>
           ) : null}
@@ -114,7 +126,7 @@ const List = styled.div`
   div {
     padding: 8px 0;
     label {
-      width: 80px;
+      width: 135px;
       display: inline-block;
       text-align: right;
       margin-right: 8px;

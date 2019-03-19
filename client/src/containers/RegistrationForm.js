@@ -162,7 +162,7 @@ class FormInfo extends React.Component {
                   message: '请选择出生日期'
                 }
               ]
-            })(<Input placeholder="例如：1990年7月10号" />)}
+            })(<Input placeholder="例如：1990年7月10日" />)}
           </FormItem>
 
           <FormItem label="血型">
