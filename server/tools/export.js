@@ -25,16 +25,16 @@ const fields = [
 
 const getUserColumns = () => {
   return [
-    { header: '注册时间', key: 'createdAt', width: 32 },
-    { header: '姓名', key: 'name', width: 32 },
-    { header: '性别', key: 'gender', width: 32 },
-    { header: '手机号', key: 'phone', width: 32 },
-    { header: '身份证号', key: 'identity', width: 32 },
-    { header: '紧急联系人', key: 'contact', width: 32 },
-    { header: '紧急联系人电话', key: 'contactPhone', width: 32 },
-    { header: '出生日期', key: 'birthday', width: 32 },
-    { header: '血型', key: 'bloodType', width: 32 },
-    { header: 'T恤尺寸', key: 'size', width: 32 }
+    { header: '注册时间', key: 'createdAt', width: 24 },
+    { header: '姓名', key: 'name', width: 24 },
+    { header: '性别', key: 'gender', width: 24 },
+    { header: '手机号', key: 'phone', width: 24 },
+    { header: '身份证号', key: 'identity', width: 24 },
+    { header: '紧急联系人', key: 'contact', width: 24 },
+    { header: '紧急联系人电话', key: 'contactPhone', width: 24 },
+    { header: '出生日期', key: 'birthday', width: 24 },
+    { header: '血型', key: 'bloodType', width: 20 },
+    { header: 'T恤尺寸', key: 'size', width: 20 }
   ]
 }
 
