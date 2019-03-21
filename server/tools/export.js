@@ -27,7 +27,7 @@ const getUserColumns = () => {
   return [
     { header: '注册时间', key: 'createdAt', width: 24 },
     { header: '姓名', key: 'name', width: 24 },
-    { header: '性别', key: 'gender', width: 24 },
+    { header: '性别', key: 'gender', width: 20 },
     { header: '手机号', key: 'phone', width: 24 },
     { header: '身份证号', key: 'identity', width: 24 },
     { header: '紧急联系人', key: 'contact', width: 24 },
